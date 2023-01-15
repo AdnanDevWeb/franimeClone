@@ -40,7 +40,7 @@ function SwiperForAnime(){
     {
       swiperAnime?.length > 0
        ? swiperAnime.map(slide =>{
-        return <SwiperSlide className='grid grid-cols-2 pt-8 pl-[70px] w-full gap-8 '>
+        return <SwiperSlide className='grid grid-cols-2 pt-8 pl-[70px] w-full gap-10 '>
           <div className='hidden sm:block'>
             <h1 className='text-[2rem] leading-tight line-clamp-2 '>{slide.title}</h1>
             <p className='max-h-[120px] mt-4 overflow-y-scroll text-lg text-slate-300'>{slide.synopsis}</p>
@@ -54,9 +54,7 @@ function SwiperForAnime(){
               Regarder
               </button>
           </div>
-          <div className='flex justify-center'>
-            <img className='rounded-2xl w-[260px] h-[350px]' src={slide.images.webp.large_image_url} alt="" />
-          </div>
+          <img className='flex-grow-0 flex-shrink-0 w-auto h-[400px] rounded-[44px] object-cover xs:aspect-square sm:aspect-auto lg:aspect-square xl:aspect-video xs:ml-0 md:ml-5' src={slide.images.webp.large_image_url} alt="" />
         </SwiperSlide>
        })
        : console.log("fetching")
@@ -64,5 +62,4 @@ function SwiperForAnime(){
     </Swiper>
   );
 };
-
 export default SwiperForAnime
