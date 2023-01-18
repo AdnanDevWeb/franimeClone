@@ -1,19 +1,17 @@
 import React, { useState } from 'react'
 import Nav from './Nav'
-import SwiperForAnime from './swiper'
-import UpComing from './upComing'
-import TopAllTime from './topAllTime'
-import Romance  from './Romance'
-import Action from './Action'
+
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './HomePage'
+import Animes from './Animes'
 function App() {
   return (
     <>
     <Nav />
-    <SwiperForAnime />
-    <UpComing />
-    <TopAllTime />
-    <Romance />
-    <Action />
+    <Routes>
+      <Route path='/' element={<HomePage />} />
+      <Route path='/animes' element={<Animes />} />
+    </Routes>
     </>
   )
 }
