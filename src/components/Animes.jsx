@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from 'react'
 import searchIcon from './searchIcon.svg'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function Animes() {
     const [animes, setAnimes] = useState([])
     const [baseAnimes, setBaseAnime] = useState([])
     const searchInput = useRef(null)
     const getAnime = async () =>{
-        const response = await fetch('https://api.jikan.moe/v4/seasons/now')
+        const response = await fetch('https://api.jikan.moe/v4/anime')
         const jsonResponse = await response.json();
         setBaseAnime(jsonResponse.data)
         setAnimes(jsonResponse.data)
@@ -34,11 +35,13 @@ function Animes() {
                 animes?.length > 0 
                 ? animes.map(anime =>{
                     return (
-                        <div className='cursor-pointer h-full relative hover:scale-105 hover:opacity-50 transition-all'>
-                            <img src={anime.images.webp.image_url} className='h-full rounded-xl obkect-cover' alt="" />
-                            <p className='absolute bottom-3 left-3 text-white bg-secendaryColor rounded-md p-2 opacity-90'>{anime.score}</p>
-                            <p className='absolute bottom-1 right-3 text-white bg-secendaryColor rounded-md p-2 opacity-90'>eps: {anime.episodes}</p>
-                        </div>
+                        <Link to={`${anime.mal_id}`}>
+                            <div className='cursor-pointer h-full relative hover:scale-105 hover:opacity-50 transition-all'>
+                                <img src={anime.images.webp.image_url} className='h-full rounded-xl obkect-cover' alt="" />
+                                <p className='absolute bottom-1 left-3 text-white bg-secendaryColor rounded-md p-2 opacity-90'>{anime.score}</p>
+                                <p className='absolute bottom-1 right-3 text-white bg-secendaryColor rounded-md p-2 opacity-90'>eps: {anime.episodes}</p>
+                            </div>
+                        </Link>
                     )
                 })
                 : baseAnimes.map(baseAnime =>{
