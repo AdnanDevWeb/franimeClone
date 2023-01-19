@@ -5,6 +5,7 @@ import Popularity from './popularity.svg'
 
 function AnimeShow() {
     const [animeData, setAnimeData] = useState([])
+    const [animeCharacters, setAnimeCharacters] = useState([])
     const { id } = useParams()
     useEffect(()=>{
         const AnimeData = async () =>{
@@ -15,7 +16,17 @@ function AnimeShow() {
           setAnimeData(anime)
         //   console.log(animeData.images.webp.image_url);
         }
+        const getCharacters = async () =>{
+            const response = await (
+                await fetch(`https://api.jikan.moe/v4/anime/${id}/characters`)
+            ).json()
+            const characters = response.data
+            const filteredCharacters = await characters.filter(character => character.role.toLowerCase() === "main")
+            setAnimeCharacters(filteredCharacters)
+            console.log(animeCharacters)
+        }
         AnimeData()
+        getCharacters()
       },[])
   return (
     <section>
@@ -55,7 +66,18 @@ function AnimeShow() {
                 <h1>{animeData.title}</h1>
                 <p>{animeData.synopsis}</p>
                 <div>
-                    // actors or characters or something else but populaye here bro
+                    <div className='flex flex-wrap gap-8 justify-center'>
+                        {
+                            animeCharacters?.length > 0
+                            ? animeCharacters.map(character =>{
+                                return <div className='relative'>
+                                    <img className='rounded-lg w-[150px]' src={character.character.images.webp.image_url} alt="" />
+                                    <p className='absolute'></p>
+                                </div>
+                            })
+                            : null
+                        }
+                    </div>
                 </div>
             </div>
             </> 
