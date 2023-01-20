@@ -2,6 +2,7 @@ import { data } from 'autoprefixer'
 import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide, } from 'swiper/react'; 
 import 'swiper/css';
+import { Link } from 'react-router-dom';
 
 function UpComing() {
   const url = 'https://api.jikan.moe/v4/seasons/upcoming'
@@ -57,13 +58,13 @@ function UpComing() {
         ? upComing.map(anime =>{
           return <SwiperSlide className='p-6 '>
           
-          <div className='hover:scale-110 rounded-2xl relative cursor-pointer'>
+          <Link to={`animes/${anime.mal_id}`} className='hover:scale-110 rounded-2xl relative cursor-pointer'>
             {anime.themes?.length > 0
               ? <p className='absolute bg-secendaryColor opacity-90 bottom-2 left-2 pl-2 pr-2 pt-1 pb-1 min-w-[70px] text-center font-bold rounded-lg text-white'>{anime.themes?.length > 0 ? anime.themes[0].name : null}</p>
               : null
             }
             <img className=' rounded-2xl min-w-[216px] h-[309px]' src={anime.images.webp.large_image_url} alt="" />
-          </div>
+          </Link>
           </SwiperSlide>
         }):null
       }

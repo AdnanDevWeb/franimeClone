@@ -87,7 +87,7 @@ function AnimeShow() {
                 </section>
             </div>
             <div>
-                <h1 className='text-white font-bold text-[2.2rem]'>{animeData.title}</h1>
+                <h1 className='text-white font-bold text-[2.2rem] line-clamp-1'>{animeData.title}</h1>
                 <p className='line-clamp-6 text-slate-200 mb-6'>{animeData.synopsis}</p>
                 <div>
                     <div className='flex flex-wrap gap-8 justify-center pt-16 relative before:content-["Personnage:"] before:absolute before:block before:top-0 before:text-white before:font-bold before:text-[2.2rem]'>
@@ -115,7 +115,7 @@ function AnimeShow() {
                                     getCharacters();
                                     getRecommandations()}}>
                                     <img className='rounded-xl h-full' src={anime.entry.images.webp.image_url} alt="" />
-                                    <p className='text-white text-center font-bold'>{anime.entry.title}</p>
+                                    <p className='text-white text-center font-bold max-w-[200px] line-clamp-1'>{anime.entry.title}</p>
                                 </Link>
                             })
                         }
